@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1a166e89db.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js" crossorigin="anonymous"></script>
+    <title>RestaurantES</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-lg-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/"><i class="fas fa-utensils"></i> RestaurantES</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-flex d-md-block bg-light sidebar font-weight-bold">
+                <div class="sidebar-sticky" id="navbarToggler">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/"><i class="fas fa-home"></i><span class="ml-3">Inicio</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/confirmPopulate"><i class="fas fa-database"></i><span class="ml-3">Poblar base de datos</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/loadRS"><i class="fas fa-upload"></i><span class="ml-3">Cargar recomendaciones</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/findAll"><i class="fas fa-list"></i><span class="ml-3">Todos los Restaurantes</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/search"><i class="fas fa-search"></i><span class="ml-3">Buscador general</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/searchCocina"><i class="fas fa-drumstick-bite"></i><span class="ml-3">Buscar por tipo de cocina</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/searchCaracteristica"><i class="fas fa-bell"></i><span class="ml-3">Buscar por servicios</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/searchPrecio"><i class="fas fa-dollar-sign"></i><span class="ml-3">Buscar por precios</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/recommendation"><i class="fas fa-share-alt"></i><span class="ml-3">Recomendaciones</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                <h1 class="text-center serif">{% block titulo %}Título{% endblock %}</h1>
+                {% block contenido %} Contenido {% endblock %}
+                {% block datos %}{% endblock %}
+            </main>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function() {
+        $('#tablaDatos').DataTable({
+            sDom: '<"top"li>rt<"top"r><"bottom"p><"clear">',
+            responsive: true,
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/es_es.json'
+            }
+        });
+    } );
+</script>
+</html>

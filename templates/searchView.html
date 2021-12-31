@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{titulo}}{% endblock %}
+{% block contenido %}
+    <form id='form' method='get' action=''>
+        {{form.as_p}}
+        <p><input class="btn btn-primary" type='submit' value='Buscar'/></p>
+    </form>
+{% endblock %}
