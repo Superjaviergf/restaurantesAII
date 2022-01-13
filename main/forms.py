@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models import Count
 
 from main.models import User, Opinion
 
@@ -22,12 +23,15 @@ class PrecioMenorIgualForm(forms.Form):
 class UserForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
-        listaUsuariosValidos = []
-        for u in User.objects.all():
-            username = u.username
-            ratings = Opinion.objects.filter(user=u)
-            if len(ratings) >= 7:
-                listaUsuariosValidos.append((username, username))
+        ratingsAgrupados = Opinion.objects.values('user__username').annotate(dcount=Count('user__username')).order_by()
+        listaUsuariosValidos = [(rating['user__username'], rating['user__username']) for rating in list(filter(lambda e: e['dcount'] >= 7, ratingsAgrupados))]
 
-        listaUsuariosValidos.sort()
+        # for u in User.objects.all():
+        #     username = u.username
+        #     ratings = Opinion.objects.filter(user=u)
+        #     if len(ratings) >= 7:
+        #         listaUsuariosValidos.append((username, username))
+        #
+        # listaUsuariosValidos.sort()
+
         self.fields['user'] = forms.ChoiceField(choices=listaUsuariosValidos, label='Seleccione un usuario')

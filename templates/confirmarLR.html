@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Confirmación para cargar el sistema de recomendación{% endblock %}
+{% block contenido %}
+    <hr>
+    <div class="container" style="margin-top: 15%;">
+        <h2>Está a punto de recargar el sistema de recomendación, este proceso puede ser bastante lento, ¿está seguro de que quiere realizar esta acción?</h2>
+        <br>
+        <div class="container">
+            <a class="btn btn-success btn-block" href="/loadRS">Aceptar y esperar</a>
+            <a class="btn btn-danger btn-block" href="/">Cancelar y volver al inicio</a>
+        </div>
+    </div>
+{% endblock %}

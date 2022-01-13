@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin', admin.site.urls),
     path('confirmPopulate', views.confirmPopulate),
     path('populate/', views.populate),
+    path('confirmLR/', views.confirmLR),
     path('loadRS/', views.loadRS),
     path('findAll/', views.findAll),
     path('search/', views.search),

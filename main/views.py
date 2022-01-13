@@ -109,6 +109,10 @@ def loadDict():
     shelf.close()
 
 
+def confirmLR(request):
+    return render(request, 'confirmarLR.html')
+
+
 def loadRS(request):
     loadDict()
     return render(request, 'loadComplete.html')
@@ -132,5 +136,6 @@ def recommendedRestaurantUser(request):
                 scores.append(re[0])
             items = zip(restaurantes, scores)
             return render(request, 'datosRecomendacion.html', {'user': user, 'items': items, 'form': form})
-    form = UserForm()
+        else:
+            form = UserForm()
     return render(request, 'recommendationView.html', {'form': form})
