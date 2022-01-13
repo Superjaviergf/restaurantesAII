@@ -20,12 +20,14 @@ class PrecioMenorIgualForm(forms.Form):
 
 
 class UserForm(forms.Form):
-    listaUsuariosValidos = []
-    for u in User.objects.all():
-        username = u.username
-        ratings = Opinion.objects.filter(user=u)
-        if len(ratings) >= 7:
-            listaUsuariosValidos.append(username)
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        listaUsuariosValidos = []
+        for u in User.objects.all():
+            username = u.username
+            ratings = Opinion.objects.filter(user=u)
+            if len(ratings) >= 7:
+                listaUsuariosValidos.append((username, username))
 
-    listaUsuariosValidos.sort()
-    user = forms.ChoiceField(choices=[(us, us) for us in listaUsuariosValidos], label='Seleccione un usuario')
+        listaUsuariosValidos.sort()
+        self.fields['user'] = forms.ChoiceField(choices=listaUsuariosValidos, label='Seleccione un usuario')
