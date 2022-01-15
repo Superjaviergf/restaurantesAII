@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models import Count
 
-from main.models import User, Opinion
+from main.models import User, Opinion, Restaurant
 
 
 class GeneralRestaurantForm(forms.Form):
@@ -9,11 +9,25 @@ class GeneralRestaurantForm(forms.Form):
 
 
 class TipoCocinaRestaurantForm(forms.Form):
-    tipoCocina = forms.CharField(label='Introduzca el tipo o los tipos de cocina')
+    def __init__(self, *args, **kwargs):
+        super(TipoCocinaRestaurantForm, self).__init__(*args, **kwargs)
+        tiposCocina = set()
+        for restaurant in Restaurant.objects.all():
+            tipos = [(tipo.strip(), tipo.strip()) for tipo in restaurant.tipoCocina.split(',')]
+            tiposCocina.update(tipos)
+
+        self.fields['tipoCocina'] = forms.ChoiceField(choices=tiposCocina, label='Introduzca el tipo o los tipos de cocina')
 
 
 class ServicioRestaurantForm(forms.Form):
-    servicio = forms.CharField(label='Introduzca el servicio o servicios')
+    def __init__(self, *args, **kwargs):
+        super(ServicioRestaurantForm, self).__init__(*args, **kwargs)
+        servicios = set()
+        for restaurant in Restaurant.objects.all():
+            caracteristicas = [(caracteristica.strip(), caracteristica.strip()) for caracteristica in restaurant.caracteristicas.split(',')]
+            servicios.update(caracteristicas)
+
+        self.fields['servicio'] = forms.ChoiceField(choices=servicios, label='Introduzca el servicio o servicios')
 
 
 class PrecioMenorIgualForm(forms.Form):
