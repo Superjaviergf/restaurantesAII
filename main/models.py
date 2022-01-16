@@ -22,8 +22,8 @@ class Restaurant(models.Model):
     horarioViernes = models.CharField(max_length=50, null=True)
     horarioSabado = models.CharField(max_length=50, null=True)
     horarioDomingo = models.CharField(max_length=50, null=True)
-    informacion = models.CharField(max_length=3000, null=True)
-    caracteristicas = models.CharField(max_length=1000, null=True)
+    informacion = models.TextField(null=True)
+    caracteristicas = models.TextField(null=True)
     url = models.URLField(validators=[URLValidator()], null=True)
 
     def __str__(self):
